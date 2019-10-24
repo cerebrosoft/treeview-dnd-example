@@ -29,7 +29,7 @@ public class TaskCellFactory implements Callback<TreeView<TaskNode>, TreeCell<Ta
             @Override
             protected void updateItem(TaskNode item, boolean empty) {
                 super.updateItem(item, empty);
-                if (item == null) return;
+                if (item == null || empty) return;
 
                 ImageView iv1 = new ImageView();
                 if (item.getName().equals("Tasks")) {
@@ -86,7 +86,7 @@ public class TaskCellFactory implements Callback<TreeView<TaskNode>, TreeCell<Ta
 
     private void drop(DragEvent event, TreeCell<TaskNode> treeCell, TreeView<TaskNode> treeView) {
         Dragboard db = event.getDragboard();
-        boolean success = false;
+		event.setDropCompleted(false);
         if (!db.hasContent(JAVA_FORMAT)) return;
 
         TreeItem<TaskNode> thisItem = treeCell.getTreeItem();
@@ -106,7 +106,7 @@ public class TaskCellFactory implements Callback<TreeView<TaskNode>, TreeCell<Ta
             thisItem.getParent().getChildren().add(indexInParent + 1, draggedItem);
         }
         treeView.getSelectionModel().select(draggedItem);
-        event.setDropCompleted(success);
+        event.setDropCompleted(true);
     }
 
     private void clearDropLocation() {
