@@ -29,7 +29,7 @@ public class TreeDragDemo extends Application {
         children.add(new TreeItem<TaskNode>(new TaskNode("walk dog")));
         children.add(new TreeItem<TaskNode>(new TaskNode("buy beer")));
 
-        TreeView<TaskNode> tree = new TreeView<TaskNode>(rootItem);
+        DragAndScrollTreeView<TaskNode> tree = new DragAndScrollTreeView<TaskNode>(rootItem);
         tree.setCellFactory(new TaskCellFactory());
         
         StackPane root = new StackPane();
